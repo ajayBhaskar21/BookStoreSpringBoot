@@ -14,9 +14,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for testing
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/api/users/register").permitAll() // Allow public access
+//                        .anyRequest().authenticated() // Secure other endpoints
+//                )
+                // for testing allowing all the api endpoints
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/users/register").permitAll() // Allow public access
-                        .anyRequest().authenticated() // Secure other endpoints
+                        .anyRequest().permitAll()
                 )
                 .formLogin(login -> login.disable()) // Disable form login
                 .httpBasic(basic -> basic.disable()); // Disable basic auth

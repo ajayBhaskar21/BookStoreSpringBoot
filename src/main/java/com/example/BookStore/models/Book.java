@@ -24,7 +24,7 @@ public class Book {
     private double price;
 
     @Column(nullable = false, unique = true)
-    private String ISBN;
+    private String isbn;
 
     @Column
     private String description;
@@ -48,12 +48,12 @@ public class Book {
     public Book() {}
 
     // Parameterized constructor
-    public Book(String title, String author, String genre, double price, String ISBN, String description, int stockAvailability) {
+    public Book(String title, String author, String genre, double price, String isbn, String description, int stockAvailability) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.price = price;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.description = description;
         this.stockAvailability = stockAvailability;
     }
@@ -74,8 +74,13 @@ public class Book {
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
 
-    public String getISBN() { return ISBN; }
-    public void setISBN(String ISBN) { this.ISBN = ISBN; }
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }

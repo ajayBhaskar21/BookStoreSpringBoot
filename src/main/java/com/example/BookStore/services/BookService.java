@@ -28,7 +28,7 @@ public class BookService {
         return bookRepository.findByTitleContaining(keyword);
     }
 
-    // Get books by genre
+    // Get books by genre (full genre should match)
     public List<Book> getBooksByGenre(String genre) {
         return bookRepository.findByGenre(genre);
     }
@@ -37,4 +37,11 @@ public class BookService {
     public Book addBook(Book book) {
         return bookRepository.save(book);
     }
+
+    // find books by author
+    public List<Book> getBooksByAuthor(String author) {
+        return bookRepository.findByAuthor(author);
+    }
+
+
 }

@@ -12,30 +12,32 @@ import java.util.Optional;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
     // GET all orders
-    @GetMapping
+    @GetMapping("/orders")
     public ResponseEntity<List<Order>> getAllOrders() {
         List<Order> orders = orderService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     // GET an order by ID
-    @GetMapping("/{id}")
+    @GetMapping("/order/{id}")
     public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
         Optional<Order> order = orderService.getOrderById(id);
         return order.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
     // POST a new order
-    @PostMapping
+    @PostMapping("/orders/placeOrder")
     public ResponseEntity<Order> placeOrder(@RequestBody Map<String, Object> orderRequest) {
+
         Long userId = Long.valueOf(orderRequest.get("userId").toString());
         List<Long> bookIds = (List<Long>) orderRequest.get("bookIds");
 

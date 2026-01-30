@@ -28,7 +28,7 @@ public class Order {
     private double totalPrice;
 
     @Column(nullable = false)
-    private String orderStatus; // "Pending", "Completed"
+    private String orderStatus; // "Pending", "Accepted"
 
     @Column(nullable = false)
     private LocalDateTime orderDate = LocalDateTime.now();
@@ -54,4 +54,11 @@ public class Order {
         this.books = books;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

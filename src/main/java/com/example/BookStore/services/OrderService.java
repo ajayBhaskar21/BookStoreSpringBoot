@@ -5,6 +5,7 @@ import com.example.BookStore.models.User;
 import com.example.BookStore.models.Book;
 import com.example.BookStore.repositories.OrderRepository;
 import com.example.BookStore.repositories.BookRepository;
+import com.example.BookStore.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.Optional;
 @Service
 public class OrderService {
 
+
     @Autowired
     private OrderRepository orderRepository;
-
+    @Autowired
+    private UserRepository userRepository;
     @Autowired
     private BookRepository bookRepository;
 
@@ -41,6 +44,10 @@ public class OrderService {
         // Fetch books by IDs and set them to order
         List<Book> books = bookRepository.findAllById(bookIds);
         order.setBooks(books);
+
+        Optional<User> user =  userRepository.findById(userId);
+        order.setUser(user.get());
+
 
         return orderRepository.save(order);
     }

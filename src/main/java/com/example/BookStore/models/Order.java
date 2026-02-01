@@ -28,10 +28,13 @@ public class Order {
     private double totalPrice;
 
     @Column(nullable = false)
-    private String orderStatus; // "Pending", "Accepted"
+    private String orderStatus; // "Pending", "Completed"
 
     @Column(nullable = false)
     private LocalDateTime orderDate = LocalDateTime.now();
+
+    @Column(nullable = false)
+    private boolean isDeleted;
 
     public Order() {}
 
@@ -60,5 +63,13 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

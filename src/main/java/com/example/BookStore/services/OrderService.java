@@ -8,6 +8,8 @@ import com.example.BookStore.repositories.BookRepository;
 import com.example.BookStore.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +41,7 @@ public class OrderService {
 
     // Place an order
     public Order placeOrder(Order order, Long userId, List<Long> bookIds) {
-        order.setOrderStatus("Pending"); // Default status
+        order.setOrderStatus("PENDING"); // Default status
 
         // Fetch books by IDs and set them to order
         List<Book> books = bookRepository.findAllById(bookIds);
@@ -62,5 +64,16 @@ public class OrderService {
             return Optional.of(order);
         }
         return Optional.empty();
+    }
+
+    public boolean deleteOrder(Long id) {
+        Optional<Order> existingOrder= orderRepository.findById(id);
+        if (existingOrder.isPresent()) {
+            Order order = existingOrder.get();
+            order.setDeleted(true);
+            orderRepository.save(order);
+            return true;
+        }
+        return false;
     }
 }
